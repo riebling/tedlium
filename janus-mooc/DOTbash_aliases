@@ -1,0 +1,7 @@
+# not really an alias, but to put it in a separate file
+if [ -z "$(pidof xfce4-panel)" ]; then
+  xfce4-panel --disable-wm-check >& /dev/null &
+fi
+
+export    JANUS_LIBRARY="${HOME}/janus/library"
+export    PATH=${PATH}:${HOME}/janus/src/Linux.x86_64-gcc-ltcl8.6/

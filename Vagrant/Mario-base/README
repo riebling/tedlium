@@ -1,0 +1,31 @@
+README for Mario-base
+
+This folder contains a Vagrantfile describing the configuration of the Mario-XFCE
+virtual machine. It is a minimal setup that includes audio and X11 support
+
+Assuming you have installed Vagrant and VirtualBox (and that they are both recent
+versions that go together), here are a few things you can do with this:
+
+1. In the folder where the Vagrantfile resides, you can download, provision, and
+    launch the virtual machine with the command
+    
+    vagrant up
+    
+2. Assuming this has been run, you now have a running VM and can ssh into it with
+
+    vagrant ssh
+    
+3. In the VM, you have a Ubuntu 14.04 machine with whatever was configured from
+    the Vagrantfile. Only alsa and X11 utilities are provided, e.g. aplay, xclock
+    
+4. Exit the VM:  
+
+    exit
+
+5. Shut down the VM (after exiting):
+
+    vagrant halt
+    
+6. Delete the VM and clean up
+
+    vagrant destroy

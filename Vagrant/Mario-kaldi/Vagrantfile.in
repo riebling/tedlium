@@ -1,0 +1,134 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure(2) do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://atlas.hashicorp.com/search.
+  config.vm.box = "http://speechkitchen.org/boxes/mario.box"
+  config.ssh.forward_x11 = true
+
+  # Disable automatic box update checking. If you disable this, then
+  # boxes will only be checked for updates when the user runs
+  # `vagrant box outdated`. This is not recommended.
+  # config.vm.box_check_update = false
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine. In the example below,
+  # accessing "localhost:8080" will access port 80 on the guest machine.
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  # config.vm.network "private_network", ip: "192.168.33.10"
+
+  # Create a public network, which generally matched to bridged network.
+  # Bridged networks make the machine appear as another physical device on
+  # your network.
+  # config.vm.network "public_network"
+
+  # Share an additional folder to the guest VM. The first argument is
+  # the path on the host to the actual folder. The second argument is
+  # the path on the guest to mount the folder. And the optional third
+  # argument is a set of non-required options.
+  # config.vm.synced_folder "../data", "/vagrant_data"
+
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # Example for VirtualBox:
+  #
+
+  # config.vm.provider "virtualbox" do |vb|
+  #   # Display the VirtualBox GUI when booting the machine
+  #   vb.gui = true
+  #
+  #   # Customize the amount of memory on the VM:
+  #   vb.memory = "1024"
+  # end
+config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, '--audio', 'pulse', '--audiocontroller', 'ac97'] # choices: hda sb16 ac97
+    vb.cpus = 8
+    vb.memory = 4096 # 4 GB
+end
+
+  #
+  # View the documentation for the provider you are using for more
+  # information on available options.
+
+  # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
+  # such as FTP and Heroku are also available. See the documentation at
+  # https://docs.vagrantup.com/v2/push/atlas.html for more information.
+  # config.push.define "atlas" do |push|
+  #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
+  # end
+
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  config.vm.provision "shell", inline: <<-SHELL
+     sudo apt-get update -y
+
+     # er1k's audio and microphone-in-kaldi list
+     sudo apt-get install -y --no-install-recommends alsa-utils linux-headers-generic build-essential dkms \
+pulseaudio gawk libportaudio-dev libportaudio0 libportaudio2 libportaudiocpp0 \
+ alsa-base alsa-utils libasound2 libasound-dev
+
+     # Add user to audio group. Otherwise aplay -l finds no hardware(!)
+     sudo usermod -a -G audio vagrant
+
+     # Stuff needed by Kaldi
+
+     # Florian's Kaldi install recipe
+
+# Installing gcc > 4.8.2 as needed for Kaldi
+apt-get install -y software-properties-common openssh-server sudo nano
+add-apt-repository -y ppa:ubuntu-toolchain-r/ppa
+apt-get update -y
+apt-get install -y --no-install-recommends build-essential g++ libatlas-base-dev subversion make automake libtool autoconf patch zlib1g-dev wg
+et
+
+# Compile Kaldi
+cd / && svn co -r 4708 https://svn.code.sf.net/p/kaldi/code/trunk kaldi-trunk
+
+# fix missing dependency
+cd /kaldi-trunk/src   && sed -Ei 's/lm: base util/lm: base util fstext/' Makefile
+
+cd /kaldi-trunk/tools
+make -j `lscpu -p|grep -v "#"|wc -l`
+./install_portaudio.sh
+cd /kaldi-trunk/src   
+./configure --shared
+make depend
+make -j `lscpu -p|grep -v "#"|wc -l`
+make -j ext
+
+# delete archive and object files to save space
+find /home/vagrant/kaldi-trunk/src -name '*.a' -or -name '*.o' -exec rm {} \;
+# ^ there is no 'make clean', is there?
+
+# uncomment the next 2 lines to compress kaldi executables
+# (this makes more sense if we later plan to export this VM)
+# 
+#cd /kaldi-trunk/src   && find *bin \( -executable -type f \) -print0 | xargs -0 -n 1 -P `lscpu -p|grep -v "#"|wc -l` gzexe
+#cd /kaldi-trunk/src   && find *bin -name "*~" -exec rm {} \;
+
+cd /kaldi-trunk/tools/openfst-1.3.4 && make clean
+#
+# for some reason non-root users do not get access to the "openfst-1.3.4" directory
+#   (and simple chmod doesn't fix it)
+cd /kaldi-trunk/tools/openfst-1.3.4 && rm -rf ../openfst; mkdir ../openfst && tar -cf - .patched * | tar -C ../openfst -xf - && cd .. && rm -r
+f openfst-1.3.4 && mv openfst openfst-1.3.4 && ln -s openfst-1.3.4 openfst 
+
+chown -R vagrant:vagrant /kaldi-trunk 
+ln -fs /kaldi-trunk /home/vagrant/kaldi-trunk
+chown vagrant:vagrant /home/vagrant/kaldi-trunk
+
+  SHELL
+end
