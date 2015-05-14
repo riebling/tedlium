@@ -1,7 +1,22 @@
-# srvk-sandbox
-Speech Recognition Virtual Kitchen Docker and Vagrant Machines
 # Welcome
-Welcome to the start page of the Kitchen Sandbox Bitbucket Wiki
+Welcome to the start page of the Speech Recognition Virtual Kitchen Docker and Vagrant sandbox Github Wiki
+
+### Git tips: ###
+"git push" is more like 3 steps:
+
+1.   git add <newfile>
+1.   git commit
+1.   git push
+
+To update a brand new Git repo with a tree of pre-existing code:
+
+1.   git clone https://github.com/your-git-username/new-empty-repo-name.git
+1.   # copy the code into the current working directory
+1.   git push origin master
+
+Useful equivalent to "svn up":
+
+* git reset --hard origin/master
 
 ## [VagrantMachines](https://github.com/riebling/srvk-sandbox/wiki/browse/VagrantMachines) ##
 
