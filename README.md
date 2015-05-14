@@ -39,17 +39,7 @@ Language Model building Kaldi experiment add-on
 
 ## Tedlium ##
 
-1. Enhanced VM: TEDLIUM + Offline Transcriber
-
-*     Download: https://github.com/riebling/srvk-sandbox/tree/master/Vagrant/tedlium
-*     Requirements: 4 GB host RAM, 2 cores
-*     Recommended: Vagrant 1.7.2
-*     README: http://speechkitchen.org/tedlium-transcriber-readme/
-*     FORUM: http://speechkitchen.org/forums/forum/kaldi-tedlium-forum/
-
-In addition to the contents of the base Tedlium VM, this also includes offline transcriber functionality which converts audio files to text transcriptions. It can function in a ‘black box’ mode where input files copied to a folder on the host computer automatically produce transcription files in another host folder. This VM also features tools to adapt your own language model from a training text file.
-
-2. Base VM: TEDLIUM – Training a Kaldi model using the TED-LIUM data set
+Base VM: TEDLIUM – Training a Kaldi model using the TED-LIUM data set
 
 *     Download: [Tedlium Git URL](https://github.com/riebling/srvk-sandbox/tree/master/Vagrant/tedlium)
 *     Requirements: 16 GB RAM 4 cores
