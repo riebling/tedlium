@@ -19,14 +19,19 @@ Useful equivalent to "svn up":
 * git reset --hard origin/master
 
 ## [VagrantMachines](https://github.com/riebling/srvk-sandbox/wiki/browse/VagrantMachines) ##
+This page describes several machines from the [Speech Recognition Virtual Kitchen](http://speechkitchen.org) implemented as [Vagrant](https://www.vagrantup.com/) machines
 
-### [Overview](https://github.com/riebling/srvk-sandbox/wiki/VagrantMachines/MachineIndex)
+### Overview
 * [Prix Fixe]() ( coming soon )
-* [Interaction in Virtual Worlds]()
-* [Arabic Transcriber](https://github.com/riebling/srvk-sandbox/wiki/browse/VagrantMachines/ArabicTranscriber)
+* [Interaction in Virtual Worlds](https://github.com/riebling/srvk-sandbox/tree/master/Vagrant/ivw)
+* [Mario XFCE](https://github.com/riebling/srvk-sandbox/tree/master/Vagrant/Mario-XFCE)
+* [Mario Base Box](https://github.com/riebling/srvk-sandbox/tree/master/Vagrant/Mario-kaldi)
+* [Kaldi Base Box](https://github.com/riebling/srvk-sandbox/tree/master/Vagrant/Mario-kaldi)
+* [Arabic Transcriber](https://github.com/riebling/srvk-sandbox/tree/master/Vagrant/Arabic-transcriber)
+ [WIKI](https://github.com/riebling/srvk-sandbox/wiki/ArabicTranscriber)
 * [Kaldi Language Model Builder](https://github.com/riebling/srvk-sandbox/wiki/browse/VagrantMachines/KaldiLmBuild) an add-on to Kaldi based virtual machines to build language models from sample text
-* [Mario Base Box](https://github.com/riebling/srvk-sandbox/wiki/browse/VagrantMachines/MarioBaseBox)
-* [TEDLIUM](https://github.com/riebling/srvk-sandbox/wiki/browse/VagrantMachines/Tedlium) a fully open-source Kaldi training setup which also has a graphical user interface with error analysis for speech developers.
+* [Mario Base Box](https://github.com/riebling/srvk-sandbox/tree/master/Vagrant/Mario-base)
+* [TEDLIUM](https://github.com/riebling/srvk-sandbox/tree/master/Vagrant/tedlium) a fully open-source Kaldi training setup which also has a graphical user interface with error analysis for speech developers.
 
 # Vagrant Machine Index #
 
