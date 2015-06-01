@@ -1,6 +1,6 @@
 General README for Vagrant
 
-This folder contains a Vagrantfile describing the configuration of the Arabic Transcriber
+This folder contains a Vagrantfile describing the configuration of a
 virtual machine.
 
 Assuming you have installed Vagrant and VirtualBox (and that they are both recent
