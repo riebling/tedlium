@@ -1,8 +1,8 @@
 # Welcome
 Welcome to the start page of the Speech Recognition Virtual Kitchen Docker and Vagrant sandbox Github Wiki
 
-## [Overview]
-This page describes several machines from the [Speech Recognition Virtual Kitchen](http://speechkitchen.org) implemented as [Vagrant](https://www.vagrantup.com/) machines
+## Overview
+This page describes several machines from the [Speech Recognition Virtual Kitchen](http://speechkitchen.org) implemented as [Docker](https://docker.com) and [Vagrant](https://www.vagrantup.com/) machines
 
 ## [Wiki](https://github.com/srvk/srvk-sandbox/wiki/browse/VagrantMachines) ##
 
