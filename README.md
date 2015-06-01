@@ -10,8 +10,6 @@ This page describes several machines from the [Speech Recognition Virtual Kitche
 * [Prix Fixe]() ( coming soon )
 * [offline-transcriber] This is an installation of Tanel Alumaes kaldi-offline-transcriber in a Docker container, using the live-decode one
 * [swbd-transcriber] This transcribes telephony conversations, using the offline-transcriber.
-
-You might get an error: https://bitbucket.org/fmetze/kitchen-sandbox/wiki/swbd-transcriber%20error 
 * [ivw (Interaction in Virtual Worlds)](https://github.com/srvk/srvk-sandbox/tree/master/Vagrant/ivw)
 * [Mario XFCE](https://github.com/srvk/srvk-sandbox/tree/master/Vagrant/Mario-XFCE)
 * [Mario Base Box](https://github.com/srvk/srvk-sandbox/tree/master/Vagrant/Mario-base)
