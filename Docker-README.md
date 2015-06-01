@@ -52,6 +52,28 @@ NUMNUM
 # this seems pretty cool to reduce the memory footprint: [http://jasonwilder.com/blog/2014/08/19/squashing-docker-images/](http://jasonwilder.com/blog/2014/08/19/squashing-docker-images/)
 ```
 
+### Git tips: ###
+"git push" is more like 3 steps:
+
+1.   git add <newfile>
+1.   git commit
+1.   git push
+
+To update a brand new Git repo with a tree of pre-existing code:
+
+1.   git clone https://github.com/your-git-username/new-empty-repo-name.git
+1.   # copy the code into the current working directory
+1.   git push origin master
+
+Useful equivalent to "svn up":
+
+* git reset --hard origin/master
+
+### Vagrant tips ###
+
+To automatically update Virtualbox guest additions, install:
+
+https://github.com/dotless-de/vagrant-vbguest
 
 ### live-decode ###
 
